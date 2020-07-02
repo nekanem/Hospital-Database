@@ -2,6 +2,8 @@
 REM reference file for this is homework.sql in week 6 folder at the bottom
 
 REM added barebones boilerplate and changed some attributes, to clean it up a bit.
+
+After finishing up the basics by tomorrow, we should implement, views, triggers, and procedure by saturday
 */
 
 CREATE TABLE employees
