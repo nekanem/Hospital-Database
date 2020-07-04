@@ -22,7 +22,7 @@ CREATE TABLE employees
     email VARCHAR2(25) CONSTRAINT emp_email_uq UNIQUE(email)
 
     /*REM SYNTAX FOR FOREIGN AND PRIMARY KEYS, CHANGE IT AS FIT */
-    -- PRIMARY KEY (),
+    PRIMARY KEY(emp_id),
 	-- FOREIGN KEY () REFERENCES __ ()
 );
 
@@ -63,7 +63,7 @@ INSERT INTO nurse VALUES
 
 CREATE TABLE patients( 
     patient_id NUMBER(6) NOT NULL,
-    patient_name VARCHAR(50),
+    patient_name VARCHAR(50) DEFAULT NULL,
     d_o_b DATE,
     gender VARCHAR2(1),
     complaint VARCHAR(50),
@@ -89,8 +89,8 @@ INSERT INTO patients VALUES
 CREATE TABLE receptionist(
     appt_id NUMBER(5),
 
-    --PRIMARY KEY(),
-	-- FOREIGN KEY () REFERENCES __ ()
+    PRIMARY KEY(appt_id),
+	FOREIGN KEY(appt_id) REFERENCES appointments(appt_id)
 );
 
 INSERT INTO receptionist VALUES
@@ -106,7 +106,7 @@ CREATE TABLE appointments(
     appt_id NUMBER(5),
     status_update VARCHAR2(11)
 
-    -- PRIMARY KEY (),
+    PRIMARY KEY(appt_id),
 	-- FOREIGN KEY () REFERENCES __ ()
 );
 
@@ -123,7 +123,7 @@ CREATE TABLE medication(
     quantity NUMBER(3),
     prescription VARCHAR2(50)
 
-    -- PRIMARY KEY (),
+    PRIMARY KEY(med_id),
 	-- FOREIGN KEY () REFERENCES __ ()
 );
 
@@ -140,7 +140,7 @@ CREATE TABLE medicalRecord(
     pre_existing_cond VARCHAR2(50),
     accessed_date DATE
 
-    -- PRIMARY KEY (),
+    PRIMARY KEY(record_id),
 	-- FOREIGN KEY () REFERENCES __ ()
 );
 
@@ -158,7 +158,7 @@ CREATE TABLE tests(
     tests_id NUMBER(2),
     test_name VARCHAR2(50)
 
-    -- PRIMARY KEY (),
+    PRIMARY KEY(tests_id),
 	-- FOREIGN KEY () REFERENCES __ ()
 );
 
@@ -170,12 +170,12 @@ INSERT INTO tests VALUES
 
 
 CREATE TABLE room(
-    room_no NUMBER(3),
+    room_no NUMBER(3) NOT NULL,
     dept_name VARCHAR2(50),
     num_beds NUMBER(1),
     room_status VARCHAR2(10)
 
-    -- PRIMARY KEY (),
+    PRIMARY KEY(room_no),
 	-- FOREIGN KEY () REFERENCES __ ()
 );
 
@@ -192,8 +192,7 @@ CREATE TABLE inventory(
     masks_quantity NUMBER(3),
     gloves_quantity NUMBER(23)
 
-    -- PRIMARY KEY (),
-	-- FOREIGN KEY () REFERENCES __ ()
+    PRIMARY KEY(masks_quantity, gloves_quantity),
 );
 
 INSERT INTO inventory VALUES
