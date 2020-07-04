@@ -43,7 +43,7 @@ CREATE TABLE physician(
     department_name VARCHAR(30),
 
     PRIMARY KEY(emp_id, last_name),
-    FOREIGN KEY(emp_id) REFERENCES dept(emp_id),
+    FOREIGN KEY(emp_id) REFERENCES employees(emp_id),
     FOREIGN KEY(department_name) REFERENCES dept(department_name),
     FOREIGN KEY(first_name) REFERENCES employees(first_name),
     FOREIGN KEY(last_name) REFERENCES employees(last_name)
