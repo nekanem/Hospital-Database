@@ -4,14 +4,18 @@ REM reference file for this is homework.sql in week 6 folder at the bottom
 REM added barebones boilerplate and changed some attributes, to clean it up a bit.
 
 After finishing up the basics by tomorrow, we should implement, views, triggers, and procedure by saturday
- We might Need to to add existing attributes from one table to another as like foreign key or smth like that so it can be accessed
+THINGS TO POLISH: 
+We might Need to to add existing attributes from one table to another as like foreign key or smth like that so it can be accessed
+I think we need a department table
+
+**THINGS TO ADD: VIEWS, STORED PROCEDURES, AND 20 QUERIES
  */
 
 CREATE TABLE employees
 (
-    emp_id NUMBER(6),
+    emp_id NUMBER(6) NOT NULL,
     employee_type VARCHAR(25),
-    department_id NUMBER(2),
+    department_id NUMBER(2) NOT NULL,
     first_name VARCHAR2(20),
     last_name VARCHAR2(25) CONSTRAINT emp_last_name_nn  NOT NULL,
     gender VARCHAR2(1),
@@ -32,7 +36,7 @@ INSERT INTO employees VALUES
 
 
 CREATE TABLE physician(
-    pcp_id NUMBER(6),
+    pcp_id NUMBER(6) NOT NULL PRIMARY KEY,
     department_name VARCHAR2(30),
 
 
@@ -58,18 +62,20 @@ INSERT INTO nurse VALUES
     ('Pediatrics');
 
 CREATE TABLE patients( 
-    patient_id NUMBER(6),
+    patient_id NUMBER(6) NOT NULL,
     patient_name VARCHAR(50),
     d_o_b DATE,
     gender VARCHAR2(1),
     complaint VARCHAR(50),
     room_no NUMBER(3),
-    pcp_id NUMBER(6),
-    med_id NUMBER(2),
+    pcp_id NUMBER(6) NOT NULL,
+    med_id NUMBER(2) NOT NULL,
 
 
-    -- PRIMARY KEY (),
-	-- FOREIGN KEY () REFERENCES __ ()
+    PRIMARY KEY(patient_id, patient_name, d_o_b, complaint, gender),
+	FOREIGN KEY(room_no) REFERENCES room(room_no),
+    FOREIGN KEY(pcp_id) REFERENCES physician(pcp_id),
+    FOREIGN KEY(med_id) REFERENCES medication(med_id),
 );
 
 INSERT INTO patients VALUES
@@ -83,7 +89,7 @@ INSERT INTO patients VALUES
 CREATE TABLE receptionist(
     appt_id NUMBER(5),
 
-    -- PRIMARY KEY (),
+    --PRIMARY KEY(),
 	-- FOREIGN KEY () REFERENCES __ ()
 );
 
