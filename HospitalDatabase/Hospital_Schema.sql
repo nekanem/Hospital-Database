@@ -183,3 +183,83 @@ CREATE TABLE inventory(
 
 INSERT INTO inventory VALUES
     (53, 23);
+    
+/* How many doctors speciialize in heart sugery? */
+SELECT COUNT(*)
+FROM physician
+WHERE department_name = 'Cardiology';
+
+/* Display all the apointments schedules for the month? */ 
+SELECT appt_id
+FROM appointments
+WHERE dates > '07-01-2020' AND dates < '07-31-2020';
+
+/* What medications  were prescibed to Jane (change to Nathaniel, no patient named Jane)*/ 
+SELECT med_id
+FROM patients
+WHERE patient_name = 'Nathaniel';
+
+/* Display all the email address for doctors at the hospital */
+SELECT email
+FROM employees
+WHERE employee_type = 'Physician';
+
+/* Display all the receptionists' names at the hospital */
+SELECT first_name ||' '|| last_name AS 'Full Name'
+FROM employees
+WHERE employee_type = 'Receptionist';
+
+/* How many patients have pre existing conditions */
+SELECT COUNT(*)
+FROM medicalRecord
+WHERE pre_existing_cond IS NOT NULL;
+
+/* How many patients are above the age of 18 (change to after 2000) also NOT WORKING*/ 
+SELECT COUNT(*)
+FROM patients
+WHERE d_o_b > '01-01-2000';
+
+/* Which doctors are above the age of 50 (changed to which pyschicans are male) */ 
+SELECT first_name ||' '|| last_name AS 'Full Name'
+FROM employees
+WHERE employee_type = 'Physician' AND gender = 'M';
+
+/* Which is the TestID for the Diagnostic Test */
+SELECT tests_id
+FROM tests
+WHERE test_name = 'Diagnostic Tests';
+
+/* What nurse is available in the Cardiology Department (change to Pediatrics)*/
+SELECT first_name ||' '|| last_name AS 'Full Name'
+FROM nurse
+WHERE department_name = 'Pediatrics';
+
+/* Display the room no. that is currenlty occupied */
+SELECT room_no
+FROM room
+WHERE room_status = 'Occupied';
+
+/* What medications are not currenlty availabe*/
+SELECT prescription
+FROM medication
+WHERE quantity > 0;
+
+/* How many beds are avaible*/
+SELECT SUM(num_beds)
+FROM room;
+
+/* What Department was patinet A admiteed to */
+
+/* Display all the physicians dept_id's*/
+SELECT DISTINCT department_name
+FROM physician;
+
+/* What day does Doe last access her Meical Records (have to add patient_id as a foriegn key to medicalRecord table for this to work) */
+SELECT MAX(accessed_date)
+FROM medicalRecord JOIN patient
+WHERE last_name = 'Doe';
+/* Display all the employees that are physicians */
+SELECT first_name ||' '|| last_name AS 'Full Name'
+FROM employees
+WHERE employee_type = 'Physician';
+
