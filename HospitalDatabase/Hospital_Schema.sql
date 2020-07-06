@@ -219,6 +219,7 @@ WHERE patient_name LIKE 'S%'
 ORDER BY patient_name;
 
 /* Display all the receptionists' names at the hospital */
+CREATE VIEW RECEPTIONIST_NAMES AS
 SELECT first_name ||' '|| last_name AS 'Full Name'
 FROM employees
 WHERE employee_type = 'Receptionist';
@@ -259,6 +260,7 @@ FROM room
 WHERE room_status = 'Occupied';
 
 /* What medications are currenlty availabe*/
+CREATE VIEW AVAILABLE_MEDS AS
 SELECT prescription
 FROM medication
 WHERE quantity > 0;
@@ -283,6 +285,7 @@ FROM medicalRecord JOIN patient
 WHERE last_name = 'Doe';
 
 /* Display all the employees that are physicians */
+CREATE VIEW PHYSICIAN_NAMES AS
 SELECT first_name ||' '|| last_name AS 'Full Name'
 FROM employees
 WHERE employee_type = 'Physician';
