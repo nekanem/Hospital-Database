@@ -158,19 +158,21 @@ INSERT INTO receptionist VALUES
 
 
 CREATE TABLE medicalRecord(
+    patient_id INT(6) NOT NULL,
     record_id INT(5),
     pre_existing_cond VARCHAR(50),
     accessed_date DATE,
 
     PRIMARY KEY(record_id)
+    FOREIGN KEY(patient_id) REFERENCES patients(patient_id)
 );
 
 
 INSERT INTO medicalRecord VALUES
-    (02345, 'Diabetes', STR_TO_DATE('05-03-2020', '%d-%m-%Y')),
-    (02567, 'ADHD', STR_TO_DATE('07-04-2020', '%d-%m-%Y')),
-    (02982, 'Depression', STR_TO_DATE('07-09-2020', '%d-%m-%Y')),
-    (02334, 'High Blood Pressure', STR_TO_DATE('08-02-2020', '%d-%m-%Y'));
+    (173293, 02345, 'Diabetes', STR_TO_DATE('05-03-2020', '%d-%m-%Y')),
+    (128312, 02567, 'ADHD', STR_TO_DATE('07-04-2020', '%d-%m-%Y')),
+    (672081, 02982, 'Depression', STR_TO_DATE('07-09-2020', '%d-%m-%Y')),
+    (219903, 02334, 'High Blood Pressure', STR_TO_DATE('08-02-2020', '%d-%m-%Y'));
 
 
 
@@ -194,7 +196,7 @@ SELECT appt_id
 FROM appointments
 WHERE dates > '07-01-2020' AND dates < '07-31-2020';
 
-/* What medications  were prescibed to Jane (change to Nathaniel, no patient named Jane)*/ 
+/* What medications  were prescibed to Nathaniel */ 
 SELECT med_id
 FROM patients
 WHERE patient_name = 'Nathaniel';
@@ -214,12 +216,12 @@ SELECT COUNT(*)
 FROM medicalRecord
 WHERE pre_existing_cond IS NOT NULL;
 
-/* How many patients are above the age of 18 (change to after 2000) also NOT WORKING*/ 
+/* How many patients were born in the year 2000 or after (NOT WORKING)*/ 
 SELECT COUNT(*)
 FROM patients
-WHERE d_o_b > '01-01-2000';
+WHERE d_o_b >= '01-01-2000';
 
-/* Which doctors are above the age of 50 (changed to which pyschicans are male) */ 
+/* Which doctors are male */ 
 SELECT first_name ||' '|| last_name AS 'Full Name'
 FROM employees
 WHERE employee_type = 'Physician' AND gender = 'M';
@@ -229,7 +231,7 @@ SELECT tests_id
 FROM tests
 WHERE test_name = 'Diagnostic Tests';
 
-/* What nurse is available in the Cardiology Department (change to Pediatrics)*/
+/* What nurse is available in the Pediatrics Department */
 SELECT first_name ||' '|| last_name AS 'Full Name'
 FROM nurse
 WHERE department_name = 'Pediatrics';
@@ -254,10 +256,11 @@ FROM room;
 SELECT DISTINCT department_name
 FROM physician;
 
-/* What day does Doe last access her Meical Records (have to add patient_id as a foriegn key to medicalRecord table for this to work) */
+/* What day does Doe last access her Meical Records */
 SELECT MAX(accessed_date)
 FROM medicalRecord JOIN patient
 WHERE last_name = 'Doe';
+
 /* Display all the employees that are physicians */
 SELECT first_name ||' '|| last_name AS 'Full Name'
 FROM employees
