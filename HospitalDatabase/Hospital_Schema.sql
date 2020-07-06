@@ -1,3 +1,5 @@
+CREATE DATABASE hospital;
+
 CREATE TABLE dept(
     department_id INT(2),
     department_name VARCHAR(30),
@@ -206,6 +208,16 @@ SELECT email
 FROM employees
 WHERE employee_type = 'Physician';
 
+/* How many masks do we have in inventory */
+SELECT masks_quantity
+FROM inventory;
+
+/* Display all the patients with last names that start with S in alphabetical order */ 
+SELECT patient_name
+FROM patients
+WHERE patient_name LIKE 'S%'
+ORDER BY patient_name;
+
 /* Display all the receptionists' names at the hospital */
 SELECT first_name ||' '|| last_name AS 'Full Name'
 FROM employees
@@ -216,10 +228,15 @@ SELECT COUNT(*)
 FROM medicalRecord
 WHERE pre_existing_cond IS NOT NULL;
 
-/* How many patients were born in the year 2000 or after (NOT WORKING)*/ 
+/* How many patients are prescibed Ibuprofen */ 
+SELECT COUNT(*)
+FROM patients p JOIN medication m ON p.med_id = m.med_id
+WHERE prescription = 'Ibuprofen';
+
+/* How many patients were born from 2000 to 2009 */ 
 SELECT COUNT(*)
 FROM patients
-WHERE d_o_b >= '01-01-2000';
+WHERE d_o_b LIKE '%200%';
 
 /* Which doctors are male */ 
 SELECT first_name ||' '|| last_name AS 'Full Name'
@@ -241,16 +258,20 @@ SELECT room_no
 FROM room
 WHERE room_status = 'Occupied';
 
-/* What medications are not currenlty availabe*/
+/* What medications are currenlty availabe*/
 SELECT prescription
 FROM medication
 WHERE quantity > 0;
 
 /* How many beds are avaible*/
+CREATE VIEW AVAILABLE_BEDS AS
 SELECT SUM(num_beds)
 FROM room;
 
-/* What Department was patinet A admiteed to */
+/* How many appointments are delayed for August 2020 */
+SELECT COUNT(*)
+FROM appointments
+WHERE status_update = 'Delayed' AND dates LIKE '08%';
 
 /* Display all the physicians dept_id's*/
 SELECT DISTINCT department_name
