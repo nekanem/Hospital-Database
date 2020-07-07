@@ -166,7 +166,7 @@ CREATE TABLE medicalRecord(
     pre_existing_cond VARCHAR(50),
     accessed_date DATE,
 
-    PRIMARY KEY(record_id)
+    PRIMARY KEY(record_id),
     FOREIGN KEY(patient_id) REFERENCES patients(patient_id)
 );
 
