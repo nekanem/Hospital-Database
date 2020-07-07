@@ -29,7 +29,7 @@ WHERE patient_name LIKE 'S%'
 ORDER BY patient_name;
 
 /* Display all the receptionists' names at the hospital */
-SELECT first_name ||' '|| last_name AS 'Full Name'
+SELECT concat(first_name, ' ', last_name) as Fullname
 FROM employees
 WHERE employee_type = 'Receptionist';
 
