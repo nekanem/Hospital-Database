@@ -49,7 +49,7 @@ FROM patients
 WHERE d_o_b LIKE '%200%';
 
 /* Which doctors are male */ 
-SELECT first_name ||' '|| last_name AS 'Full Name'
+SELECT concat(first_name, ' ', last_name) as Fullname
 FROM employees
 WHERE employee_type = 'Physician' AND gender = 'M';
 
@@ -59,7 +59,7 @@ FROM tests
 WHERE test_name = 'Diagnostic Tests';
 
 /* What nurse is available in the Pediatrics Department */
-SELECT first_name ||' '|| last_name AS 'Full Name'
+SELECT concat(first_name, ' ', last_name) as Fullname
 FROM nurse
 WHERE department_name = 'Pediatrics';
 
@@ -92,6 +92,6 @@ FROM medicalRecord JOIN patient
 WHERE last_name = 'Doe';
 
 /* Display all the employees that are physicians */
-SELECT first_name ||' '|| last_name AS 'Full Name'
+SELECT concat(first_name, ' ', last_name) as Fullname
 FROM employees
 WHERE employee_type = 'Physician';
