@@ -1,6 +1,6 @@
 CREATE VIEW receptionistNames 
 AS
-SELECT first_name ||' '|| last_name AS 'Full Name'
+SELECT concat(first_name, ' ', last_name) as Fullname
 FROM employees
 WHERE employee_type = 'Receptionist';
 select * from receptionistNames;
