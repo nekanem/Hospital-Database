@@ -1,4 +1,5 @@
 /*checks for incorrect email input */
+delimiter //
 Create Trigger email_check BEFORE UPDATE ON employees
   FOR EACH ROW
   BEGIN
@@ -7,4 +8,5 @@ Create Trigger email_check BEFORE UPDATE ON employees
     ELSE new.email = new.email;
     END IF;
   END;
+delimiter;
 
